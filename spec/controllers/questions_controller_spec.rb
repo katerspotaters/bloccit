@@ -5,14 +5,14 @@ RSpec.describe QuestionsController, type: :controller do
 
     let (:my_question) do
       Question.create(
-      id:1
+      id:1,
       title:  RandomData.random_sentence,
       body:   RandomData.random_paragraph,
       resolved: false
       )
     end
 
-    descibe "GET #index" do
+    describe "GET #index" do
       it "returns http success" do
         get :index
         expect(response).to have_http_status(:success)
@@ -27,7 +27,7 @@ RSpec.describe QuestionsController, type: :controller do
   describe "GET show" do
     it "returns http success" do
       get :show, {id: my_question.id}
-      expect(response).ro have_http_status(:success)
+      expect(response).to have_http_status(:success)
     end
 
     it "renders the #show view" do
@@ -60,7 +60,7 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe "POST create" do
     it "increases the number of questions by 1" do
-      expect { post :create. {question: {title: "Title", body: "Body", resolved: false}}}.to change(Question,:count).by(1)
+      expect{ post :create, {question: {title: "Title", body: "Body", resolved: false}} }.to change(Question,:count).by(1)
     end
 
     it "assigns the new question to @question" do
