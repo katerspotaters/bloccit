@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
+
   resources :topics do
-      resources :posts, except: [:index]
+    resources :sponsored_posts, except: [:index]
+    resources :posts, except: [:index]
   end
 
   get 'about' => 'welcome#about'
 
-  root 'welcome#index'
+  root to: 'welcome#index'
 
 end
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
