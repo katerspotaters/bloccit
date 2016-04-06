@@ -3,25 +3,28 @@ class CommentsController < ApplicationController
   before_action :authorize_user, only: [:destroy]
 
    def create
- # #11
      @post = Post.find(params[:post_id])
+     @topic = Topic.find(params[:topic_id])
      comment = @post.comments.new(comment_params)
+     comment = @topic.comments.new(comment_params)
      comment.user = current_user
 
      if comment.save
        flash[:notice] = "Comment saved successfully."
- # #12
+
        redirect_to [@post.topic, @post]
      else
        flash[:alert] = "Comment failed to save."
- # #13
+
        redirect_to [@post.topic, @post]
      end
    end
 
    def destroy
      @post = Post.find(params[:post_id])
+     @topic = Topic.find(params[:topic_id])
      comment = @post.comments.find(params[:id])
+     comment = @topic.comments.find(params[:id])
 
      if comment.destroy
        flash[:notice] = "Comment was deleted."
@@ -32,8 +35,9 @@ class CommentsController < ApplicationController
      end
    end
 
+
    private
- # #14
+
    def comment_params
      params.require(:comment).permit(:body)
    end
