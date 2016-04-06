@@ -9,13 +9,11 @@ RSpec.describe LabelsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
 
-# #14
     it "renders the #show view" do
       get :show, { id: my_label.id }
       expect(response).to render_template :show
     end
 
-# #15
    it "assigns my_label to @label" do
      get :show, { id: my_label.id }
      expect(assigns(:label)).to eq(my_label)
