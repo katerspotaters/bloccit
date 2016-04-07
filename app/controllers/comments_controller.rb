@@ -30,14 +30,26 @@ class CommentsController < ApplicationController
 
    def destroy
      @post = Post.find(params[:post_id])
+     @topic = Topic.find(params[:post_id])
      comment = @post.comments.find(params[:id])
+     comment = @topic.comments.find(params[:id])
 
+    if @post
+      comment = @post.comments.new(comment_params)
      if comment.destroy
        flash[:notice] = "Comment was deleted."
        redirect_to [@post.topic, @post]
      else
        flash[:alert] = "Comment couldn't be deleted. Try again."
        redirect_to [@post.topic, @post]
+     elsif @topic
+       comment = @topic.comments.new(comment_params)
+       if comment.destroy
+         flash[:notice] = "Comment was deleted."
+         redirect_to @topic
+       else
+         flash[:alert] = "Comment couldn't be deleted. Try again."
+         redirect_to @topic
      end
    end
 
