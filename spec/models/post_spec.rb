@@ -1,9 +1,4 @@
 require 'rails_helper'
-
-RSpec.describe Post, type: :model do
-  let(:topic) { create(:topic) }
-  let(:user) { create(:user) }
-  require 'rails_helper'
 include RandomData
 
 RSpec.describe Post, type: :model do
