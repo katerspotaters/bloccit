@@ -3,6 +3,7 @@ class TopicsController < ApplicationController
     @topics = Topic.visible_to(current_user)
   end
 
+
   def show
     @topic = Topic.find(params[:id])
 
