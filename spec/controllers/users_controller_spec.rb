@@ -93,7 +93,7 @@ RSpec.describe UsersController, type: :controller do
       new_post = create(:post, topic: topic, user: user)
       new_favorite = Favorite.create!(post: new_post, user: user)
       get :show, { id: user }
-      expect(assigns(:favorites)).to eq(new_favorite)
+      expect(assigns(:favorites).last).to eq(new_favorite)
     end
   end
 end
